@@ -38,7 +38,7 @@ export class UserService {
 
   async create(user: User): Promise<User> {
     const createdUser = await this.userModel.create(user);
-    return createdUser.save();
+    return createdUser;
   }
 
   async findbyId(id: string): Promise<User> {
@@ -53,7 +53,7 @@ export class UserService {
     return user;
   }
 
-  async updatebyId(id: string, user: User): Promise<User> {
+  async updateById(id: string, user: User): Promise<User> {
     const updatedUser = await this.userModel.findByIdAndUpdate(id, user, {
       new: true,
       runValidators: true,
@@ -64,7 +64,7 @@ export class UserService {
     return updatedUser;
   }
 
-  async deletebyId(id: string): Promise<User> {
+  async deleteById(id: string): Promise<User> {
     const deletedUser = await this.userModel.findByIdAndDelete(id);
     if (!deletedUser) {
       throw new NotFoundException('User not found');

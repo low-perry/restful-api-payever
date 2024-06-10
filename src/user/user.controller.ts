@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './schemas/user.schema';
-import { CreateUserDto } from './dto/create-book.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Query as ExpressQuery } from 'express-serve-static-core';
 import { diskStorage } from 'multer';
@@ -50,12 +50,12 @@ export class UserController {
     @Param('id') id: string,
     @Body() user: UpdateUserDto,
   ): Promise<User> {
-    return this.userService.updatebyId(id, user);
+    return this.userService.updateById(id, user);
   }
 
   @Delete(':id')
   async deleteUser(@Param('id') id: string): Promise<User> {
-    return this.userService.deletebyId(id);
+    return this.userService.deleteById(id);
   }
 
   @Post(':id/avatar')
